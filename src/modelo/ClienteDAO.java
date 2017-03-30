@@ -18,7 +18,8 @@ public class ClienteDAO {
     private static final String INSERIR = "insert into cliente values (null, ?, ?, ?, ?, ?)";
     private static final String ATUALIZAR = "update cliente set nm_cliente=?, sg_sexo=?, ds_endereco=?, nm_cidade=?, sg_estado=? where cd_cliente=?";
     private static final String DELETAR = "delete from cliente where cd_cliente=?";
-    private static final String BUSCAR = "select * from cliente where cd_cliente=?";
+    private static final String SELECIONAR = "select * from cliente where cd_cliente=?";
+    private static final String BUSCARTODOS = "Select * From Cliente";
     private Connection conn;
 
     public void Insert(Cliente c) throws SQLException {
@@ -61,7 +62,7 @@ public class ClienteDAO {
 
     public Cliente Select(Cliente c) throws SQLException {
         conn = Conectar.Banco();
-        PreparedStatement p = conn.prepareStatement(BUSCAR);
+        PreparedStatement p = conn.prepareStatement(SELECIONAR);
         p.setInt(1, c.getCd());
         p.executeQuery();
         ResultSet rs = p.getResultSet();
@@ -83,9 +84,8 @@ public class ClienteDAO {
     
     //teste
     public List<Cliente> getClientes() throws SQLException{
-        conn = Conectar.Banco();
-        List<String> foo = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("select * from cliente");
+        conn = Conectar.Banco();       
+        PreparedStatement stmt = conn.prepareStatement(BUSCARTODOS);
         ResultSet rs = stmt.executeQuery();
         List<Cliente> clientes = new ArrayList<>() ;
         while (rs.next()){
@@ -94,6 +94,7 @@ public class ClienteDAO {
             c.setNome(rs.getString("nm_cliente"));
             c.setCidade(rs.getString("nm_cidade"));
             c.setEndereco(rs.getString("ds_endereco"));
+            c.setEstado(rs.getString("sg_estado"));
             c.setSg(rs.getString("sg_sexo"));
             clientes.add(c);
         }

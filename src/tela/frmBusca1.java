@@ -200,17 +200,17 @@ public class frmBusca1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Busca efetuada com sucesso!");
             }else{
                 JOptionPane.showMessageDialog(rootPane, "Nenhum cliente encontrado! Por favor passe um código válido");
-                lblNome.setText("");
-                lblSexo.setText("");
-                lblEnd.setText("");
+                lblNome.setText  ("");
+                lblSexo.setText  ("");
+                lblEnd.setText   ("");
                 lblCidade.setText("");
                 lblEstado.setText("");
             }
            
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Erro: " + e);
         }
+        
     }//GEN-LAST:event_btnPesqActionPerformed
 
     /**
